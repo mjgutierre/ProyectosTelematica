@@ -1,2 +1,5 @@
-# ProyectosTelematica
-Aquí estarán almacenados los proyectos 1 y 2 de la asignatura Telemática 
+# Proyectos Telematica
+
+### Estudiantes 
+- Maria Paulina Ocampo Duque
+- María José Gutiérrez Estrada
