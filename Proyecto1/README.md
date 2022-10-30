@@ -23,7 +23,7 @@ El proxi Inverso es un servidor que se encuentra entre el cliente y el destino r
     - El servidor PIBL.
     - Tres servidores de aplicación web. 
 
-    ![This is an image]([https://myoctocat.com/assets/images/base-octocat.svg](https://avinetworks.com/wp-content/uploads/2019/02/round-robin-load-balancing-diagram.png))
+    ![This is an image](https://avinetworks.com/wp-content/uploads/2019/02/round-robin-load-balancing-diagram.png)
 
     > Toda la arquitectura detallada en el ítem anterior fue desplegada en la nube de Amazon Web Services empleando instancias EC2 para la instalación y configuración de nuestra solución
 
