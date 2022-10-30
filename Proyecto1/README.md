@@ -45,4 +45,7 @@ El proxi Inverso es un servidor que se encuentra entre el cliente y el destino r
   - **Conclusiones:**
 
   - **Referencias:**
+      - Round Robin Load Balancer. (2022). Avinetworks.com. https://avinetworks.com/wp-content/uploads/2019/02/round-robin-load-balancing-diagram.png
+      - Create a HTTP Proxy Using Python | Hack Ed. (n.d.). Www.youtube.com. Retrieved October 30, 2022, from https://www.youtube.com/watch?v=Lhxwh30kqQ0
+      
 
