@@ -27,20 +27,20 @@ El proxi Inverso es un servidor que se encuentra entre el cliente y el destino r
 
     > Toda la arquitectura detallada en el ítem anterior fue desplegada en la nube de Amazon Web Services empleando instancias EC2 para la instalación y configuración de nuestra solución
 
-        a. La version utilizada para python es la 3.X y solo se emplearon los siguientes “import”: 
-            sys, socket.
-        b. Se empleo la API Sockets.
-        c. Soporta peticiones de forma concurrente desde diferentes tipos de clientes que envíen peticiones HTTP.
-        d. Se procesan peticiones para la versión de protocolo HTTP/1.1.
-        e. El servidor escucha peticiones en el puerto 8080. 
-        f. Una vez envié la petición al servidor, se espera la respuesta para enviarla al cliente web que la solicito. 
-        g. La aplicación PIBL implementa un proceso “log” donde se registran todas las peticiones que recibe. En este sentido, el log debe permitir registrar todas las peticiones que se reciben y debe visualizar la petición que se hace y la respuesta que se entrega. Esto se debe visualizar por la salida estándar, y de igual forma, se debe implementar el registro en un archivo.
-        h. La función de proxy permite el caché para diferentes recursos que se soliciten por parte de los clientes. Para esto se considera lo siguiente:
+       - La version utilizada para python es la 3.X y solo se emplearon los siguientes “import”: 
+           sys, socket.
+       - Se empleo la API Sockets.
+       - Soporta peticiones de forma concurrente desde diferentes tipos de clientes que envíen peticiones HTTP.
+       - Se procesan peticiones para la versión de protocolo HTTP/1.1.
+       - El servidor escucha peticiones en el puerto 8080. 
+       - Una vez envié la petición al servidor, se espera la respuesta para enviarla al cliente web que la solicito. 
+       - La aplicación PIBL implementa un proceso “log” donde se registran todas las peticiones que recibe. En este sentido, el log debe permitir registrar todas las peticiones que se reciben y debe visualizar la petición que se hace y la respuesta que se entrega. Esto se debe visualizar por la salida estándar, y de igual forma, se debe implementar el registro en un archivo.
+       - La función de proxy permite el caché para diferentes recursos que se soliciten por parte de los clientes. Para esto se considera lo siguiente:
           a. Para todos los recursos solicitados en las peticiones hecha por los clientes, la respuesta debe ser almacenada en en un archivo en el disco del servidor. De esta forma se garantiza que el cache persista en caso tal se presente una falla en el servidor PIBL. Así, la próxima vez que se realice la petición de este recurso, se debe acceder desde al disco y enviar la respuesta desde aquí hacia el cliente.
           b. Los recursos para almacenar en el cache deben ser localizados en el directorio donde se ejecuta la aplicación principal del PIBL.
           c. Se debe implementar un mecanismo para implementar un TTL para cada recurso que se mantenga en el cache. Esto debe ser un parámetro que se pase al momento de lanzar la aplicación.
-        i. Para efectos de distribución de la carga de las peticiones, la política a implementar es Round Robin.
-        j. Su PIBL debe tener un archivo de configuración que permita parametrizar el puerto en el que se ejecuta (p.ej., por defecto es 8080) así como incluir la lista de servidores (backend) que contestan las peticiones
+       - Para efectos de distribución de la carga de las peticiones, la política a implementar es Round Robin.
+       - Su PIBL debe tener un archivo de configuración que permita parametrizar el puerto en el que se ejecuta (p.ej., por defecto es 8080) así como incluir la lista de servidores (backend) que contestan las peticiones
 
   - **Conclusiones:**
 
