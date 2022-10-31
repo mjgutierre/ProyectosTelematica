@@ -104,7 +104,7 @@ Para escoger los dominios utilizamos un proveedor llamado freenom y cambiamos el
 Al ser un servidor desplegado en la nube, no hay necesidad de iniciar localmente este mismo, solo hay que ingresar a la dirección y revisar su contenido el cual fue generado con las especificaciones y necesidades de la problemática presentada en el proyecto.  
 
     http://primarymakeupcompany.tk/ 
-
+    
     http://secondmakeupcompany.tk/  
 
 ## Referencias  
