@@ -22,7 +22,7 @@ los diferentes productos que tienen en el mercado, para darle solución a este p
 
 ## Vista arquitectónica y despliegue de la aplicación
 
-![This is an image](https://drive.google.com/file/d/1PGBZEsRHO68UV3vw6NcVeYjrJMDLbNwP/view)
+![This is an image](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuCii02yEZMYT0vM-NCfPVCbz_6zyykVTWxLbq2S4QxTsgrKfcK-zF-KkmO-iGxwqwYP90jPaBaDs9cGb3ZY2g0s7JZpkw65ppuWwC_9lc9jFKOCCJ4OfqeQcfbitkF9lhfopD4DKT4VDD-V34pPPQ8qEs10vVLDYcRqFjhp8hROnokGoc5D-ArQbU/w576-h189/k.png)
 
 **Creación de instancias Amazon**
   - Creamos una instancia Amazon EC2 en la consola de AWS y utilizamos la AMI de Amazon Linux 2 para lanzarla en un entorno virtual 
