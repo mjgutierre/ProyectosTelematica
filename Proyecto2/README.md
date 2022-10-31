@@ -13,7 +13,7 @@ los diferentes productos que tienen en el mercado, para darle solución a este p
 - **AWS:** conjunto de herramientas y servicios de computación en la nube de Amazon 
 - **Amazon RDS database:** es un servicio web que facilita la configuración, la operación y la escala de una base de datos relacional en Nube de AWS. Proporciona una capacidad rentable y de tamaño ajustable para una base de datos relacional estándar y se ocupa de las tareas de administración de bases de datos comunes, permite la escalabilidad horizontal y ofrece copias de seguridad automatizadas. 
 - **Direcciones IP elásticas AWS:** son direcciones IPv4 estáticas diseñadas para la informática en la nube dinámica. Con una dirección IP elástica, puede enmascarar los errores de una instancia o software volviendo a mapear rápidamente la dirección a otra instancia de su cuenta. 
-- **Balanceador de cargas AWS: distribuye automáticamente el tráfico de aplicaciones entrantes entre varios destinos y dispositivos virtuales en una o varias zonas de disponibilidad 
+- **Balanceador de cargas AWS:** distribuye automáticamente el tráfico de aplicaciones entrantes entre varios destinos y dispositivos virtuales en una o varias zonas de disponibilidad 
 - **Amazon Linux 2:** proporciona un entorno de ejecución estable, seguro y de alto rendimiento para las aplicaciones que se ejecutan en Amazon EC2 
 - **Wordpress:** es un software de código abierto que se puede usar para crear un sitio web, un blog o una aplicación. 
 - **MariaDB:** es un sistema de gestión de bases de datos relacional, derivado de MySQL. 
