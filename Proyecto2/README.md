@@ -22,7 +22,7 @@ los diferentes productos que tienen en el mercado, para darle solución a este p
 
 ## Vista arquitectónica y despliegue de la aplicación
 
-![This is an image](https://drive.google.com/file/d/1PGBZEsRHO68UV3vw6NcVeYjrJMDLbNwP/view?usp=share_link)
+![This is an image](https://drive.google.com/file/d/1PGBZEsRHO68UV3vw6NcVeYjrJMDLbNwP/view)
 
 **Creación de instancias Amazon**
   - Creamos una instancia Amazon EC2 en la consola de AWS y utilizamos la AMI de Amazon Linux 2 para lanzarla en un entorno virtual 
