@@ -10,6 +10,8 @@ El proxi Inverso es un servidor que se encuentra entre el cliente y el destino r
 
     El balanceo de carga en redes provee escalabilidad y fácil manejo a los servicios de TCP/IP, Web, Proxy, VPN y servicios de multimedia. Este brinda un valor especial para que las empresas extiendan sus servicios de TCP/IP así como aplicaciones de e-commerce y de bases de datos. El balanceo de carga distribuye el tráfico IP a múltiples copias o instancias de servicios TCP/IP, cada uno corriendo en un host dentro de los servidores
 
+Utilizando la política Round Robin, todas las peticiones a un sitio en particular se distribuyen eventualmente alrededor de todas las máquinas en el cluster. Como resultado, todos los nodos los nodos en el cluster son expuestos a la red.
+
   - **Desarrollo:**
     Para el desarrollo de la practica el PIBL fue escrito en Python. Hay muchas razones por las cuales decidimos acoger este lenguaje de programación. Excluyendo el hecho de que su sintaxis es posiblemente una de las más fáciles de entender, estas son algunas de las razones:
         - Está presente en la mayoría de los servidores "modernos"
