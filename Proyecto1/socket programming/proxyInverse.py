@@ -1,111 +1,125 @@
-#Let’s start by building a Web Server that will listen to incoming requests. 
-#Luckily Python comes with a Web Server implementation that’s quite straightforward to user.
-from http.server import BaseHTTPRequestHandler,HTTPServer
-import argparse, os, random, sys, requests
+# Import required modules
+import socket
+import sys #options and arguments while running
+from _thread import *
+from decouple import config
 
-from socketserver import ThreadingMixIn
-import threading
+try:
+    listening_port= int(input("Enter a listening port: "))
+except KeyboardInterrupt:
+        print ("\n[*] User has requested an interrupt")
+        print ("[*]Application Exiting....")
+        sys.exit()
 
-hostname = 'en.wikipedia.org'
+#variables 
+max_connection = 5
+buffer_size= 8192
+#ttl hay que ponerlo
 
-def merge_two_dicts(x, y):
-    return x | y
+def start(): 
+    rr=0
+    try: 
+        #creates a socket that will act as our server and uses addresses that follow the IPv4 format.
+        sock= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.bind(('', listening_port))
+        sock.listen(max_connection)
+        print("Inicializating Socket... Done")
+        print("Socket bind succesfully ")
+        print ('[*] Server started successfully [{}]'.format(listening_port))
+    except Exception:
+            print ("[*]Unable to initialize socket" )
+            print (Exception)
+            sys.exit(2)
 
-def set_header():
-    headers = {
-        'Host': hostname
-    }
-
-    return headers
-
-class ProxyHTTPRequestHandler(BaseHTTPRequestHandler):
-    protocol_version = 'HTTP/1.0'
-    def do_HEAD(self):
-        self.do_GET(body=False)
-        return
+    while True:
+        try: 
+        #grabs a connection from a client, and does something with it. 
+            conn, addr = sock.accept() # Establish connection with client.
+            data = conn.recv(buffer_size)
+            print(data)
+            
+        #Round robin implementation
+            if rr>=len(data):
+                    rr=0
+            webserver = data[rr]
+            rr+=1
+            start_new_thread (conn_string,(conn,data,addr))
         
-    def do_GET(self, body=True):
-        sent = False
-        try:
-            url = 'https://{}{}'.format(hostname, self.path)
-            req_header = self.parse_headers()
+        except KeyboardInterrupt:
+            sock.close()
+            print("\n[*] Graceful shutdown")
+            sys.exit(1)
 
-            print(req_header)
-            print(url)
-            resp = requests.get(url, headers=merge_two_dicts(req_header, set_header()), verify=False)
-            sent = True
+#implementation of the direction connected to our server
+def conn_string (conn, data, addr):
+    try: 
+        print (data)
+        first_line = data.split(b'\n')[0]
 
-            self.send_response(resp.status_code)
-            self.send_resp_headers(resp)
-            msg = resp.text
-            if body:
-                self.wfile.write(msg.encode(encoding='UTF-8',errors='strict'))
-            return
-        finally:
-            if not sent:
-                self.send_error(404, 'error trying to proxy')
+        url = first_line.split(" ")[1]
+        http_pos = url.find(b'://')
+        if(http_pos==-1):
+            temp=url
+        else:
+            temp= url[(http_pos+3):]
 
-    def do_POST(self, body=True):
-        sent = False
-        try:
-            url = 'https://{}{}'.format(hostname, self.path)
-            content_len = int(self.headers.getheader('content-length', 0))
-            post_body = self.rfile.read(content_len)
-            req_header = self.parse_headers()
+        port_pos = temp.find(b':')
 
-            resp = requests.post(url, data=post_body, headers=merge_two_dicts(req_header, set_header()), verify=False)
-            sent = True
+        webserver_pos = temp.find(b'/')
 
-            self.send_response(resp.status_code)
-            self.send_resp_headers(resp)
-            if body:
-                self.wfile.write(resp.content)
-            return
-        finally:
-            if not sent:
-                self.send_error(404, 'error trying to proxy')
+        if webserver_pos == -1:
+            webserver_pos =len(temp)
+            webserver = ""
+            port = -1 
 
-    def parse_headers(self):
-        req_header = {}
-        for line in self.headers:
-            line_parts = [o.strip() for o in line.split(':', 1)]
-            if len(line_parts) == 2:
-                req_header[line_parts[0]] = line_parts[1]
-        return req_header
+        if (port_pos == -1 or webserver_pos < port_pos):
+            port= 8080
+            webserver = temp[:webserver_pos]
+        else: 
+            port = int((temp[(port_pos+1):])[:webserver_pos-port_pos-1])
+            webserver = temp[port_pos]
+        
+        print(webserver)
+        print("va a entrar al proxy")
+        proxy_server(webserver, port, conn, addr, data)
+    except Exception:
+        pass
 
-    def send_resp_headers(self, resp):
-        respheaders = resp.headers
-        print ('Response Header')
-        for key in respheaders:
-            if key not in ['Content-Encoding', 'Transfer-Encoding', 'content-encoding', 'transfer-encoding', 'content-length', 'Content-Length']:
-                print (key, respheaders[key])
-                self.send_header(key, respheaders[key])
-        self.send_header('Content-Length', len(resp.content))
-        self.end_headers()
+#proxy server implementation
+def proxy_server(webserver, port, conn, addr, data):
+    print("esta entrando al proxy server")
+    try: 
+        #print(data)
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((webserver,port))
+        print("se conecto el server" )#,webserver
+        sock.sendall(data)#lo cambie por sendall peroestaba en send
+        print("se envio algo")
 
-def parse_args(argv=sys.argv[1:]):
-    parser = argparse.ArgumentParser(description='Proxy HTTP requests')
-    parser.add_argument('--port', dest='port', type=int, default=9999,
-                        help='serve HTTP requests on specified port (default: random)')
-    parser.add_argument('--hostname', dest='hostname', type=str, default='en.wikipedia.org',
-                        help='hostname to be processd (default: en.wikipedia.org)')
-    args = parser.parse_args(argv)
-    return args
+        while True:
+            reply = sock.recv(buffer_size)
+          
+            if len(reply) > 0: 
+                    conn.send(reply)
 
-class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
-    """Handle requests in a separate thread."""
+                    dar=float(len(reply))
+                    dar= float (dar/1024)
+                    dar= "{}.3s".format(dar)
+                    dar='%s KB' % (dar)
+                    print('[*] Request Done: {} => {} <= {}'.format(addr[0],dar, webserver))
+                    print(reply)
+            else: 
+                break
 
-def main(argv=sys.argv[1:]):
-    global hostname
-    args = parse_args(argv)
-    hostname = args.hostname
-    print('http server is starting on {} port {}...'.format(args.hostname, args.port))
-    server_address = ('127.0.0.1', args.port)
-    httpd = ThreadedHTTPServer(server_address, ProxyHTTPRequestHandler)
-    print('http server is running as reverse proxy')
-    httpd.serve_forever()
+        sock.close()
+
+        conn.close()
+    except socket.error:
+        sock.close() 
+       # Clean up the connection
+        conn.close()
+        print(sock.error)
+        sys.exit(1)
 
 if __name__ == '__main__':
-    main()
-
-
+    start()
