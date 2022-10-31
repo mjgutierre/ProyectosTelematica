@@ -4,8 +4,6 @@ La solución a implementar debe contar con los siguientes componentes:
 - Tres servidores de aplicación web. La aplicación se debe replicar en los tres servidores, es decir, es la misma.
 
 ## Documentación
-La documentación se debe incluir en el repo en un archivo _README.md_. En este archivo se requiere que usted incluya los detalles de implementación donde como mínimo se esperan las siguientes secciones:
-
   - **Introducción:**
 Para el despliegue de esta practica se presentan conceptos como lo son el Proxi inverso y el balanceador de cargas para el desarrollo de una aplicación web que escuche peticiones y entregue solicitudes al usuario. 
 El proxi Inverso es un servidor que se encuentra entre el cliente y el destino real de la solicitud. Consultará el recurso real al que desea acceder y le devolverá la respuesta que obtuvo después de haberlo manipulado.Al mismo tiempo, se ejecuta el balanceo de carga round robin, que es una forma sencilla de distribuir las peticiones de los clientes entre un grupo de servidores. La solicitud de un cliente se envía a cada servidor por turnos. El algoritmo indica al equilibrador de carga que vuelva al principio de la lista y se repite de nuevo.
