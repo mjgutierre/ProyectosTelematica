@@ -41,8 +41,28 @@ El proxi Inverso es un servidor que se encuentra entre el cliente y el destino r
         c. Se debe implementar un mecanismo para implementar un TTL para cada recurso que se mantenga en el cache. Esto debe ser un parámetro que se pase al momento de lanzar la aplicación.
        - Para efectos de distribución de la carga de las peticiones, la política a implementar es Round Robin.
        - Su PIBL debe tener un archivo de configuración que permita parametrizar el puerto en el que se ejecuta (p.ej., por defecto es 8080) así como incluir la lista de servidores (backend) que contestan las peticiones
-
+    
   - **Conclusiones:**
+Con este proyecto se pudo lograr la implementación de un servidor de balanceo de carga HTTP, con lo cual se logra mejorar el manejo de las peticiones HTTP simultaneas
+de una forma más eficiente e inteligente; lo cual permite disminuir los tiempos de respuesta y aumentar la tasa de rendimiento de una plataforma web. 
+
+Debido al papel clave que juegan, los servidores proxy inversos siempre se deben implementar en modo de alta disponibilidad, junto con las funciones del balanceador de carga que distribuye peticiones entre los servidores. Los requisitos para lograr estos objetivos se basaran en el contenido de configuracion de estos srvicios en donde deberan tener: 
+  - Capacidad de gestionar tráfico SSL
+  - Capacidad de compresión de datos
+  - Failover Optimizado con opciones de alta disponibilidad
+  - Almacenamiento en caché
+  - Capacidad de reencriptar tráfico
+
+  -**Funcionamiento**
+  Para ejecutar el servidor utilizaremos el comando:
+  
+      python proxyInverse.py
+     
+  y despues de esto ingresaremos el puerto manualmente por el cual está escuchando nuestro servidor:
+ 
+      8080
+      
+  Luego de esto estaremos viendo como se envian 3 mensajes de confirmacion y empezaremos a evidenciar el envío de solicitudes.
 
   - **Referencias:**
       - Round Robin Load Balancer. (2022). Avinetworks.com. https://avinetworks.com/wp-content/uploads/2019/02/round-robin-load-balancing-diagram.png
